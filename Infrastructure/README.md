@@ -4,7 +4,18 @@
 
 This guide details the Docker Compose setup used to simulate a network of data centers containing multiple MongoDB servers. Below is a schematic representation of our setup:
 
-![Data Center Simulation Diagram](path_to_diagram.png)
+### Data Center Structure
+
+Below is the layout of our simulated datacenters:
+
+| Datacenter 1  | Datacenter 2  | Datacenter 3  |
+|---------------|---------------|---------------|
+| DC1-Server1   | DC2-Server1   | DC3-Server1   |
+| DC1-Server2   | DC2-Server2   | DC3-Server2   |
+| DC1-Server3   | DC2-Server3   | DC3-Server3   |
+| DC1-Server4   | DC2-Server4   | DC3-Server4   |
+| DC1-Server5   | DC2-Server5   | DC3-Server5   |
+
 
 ### `docker-compose.yml` Overview
 
