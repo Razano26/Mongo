@@ -14,7 +14,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 20
 
       - name: Install dependencies
         run: |
@@ -22,7 +22,11 @@ jobs:
           npm install
 
       - name: Lint code
-        run: npm run lint-ci
+        run: |
+          cd backend
+          npm run lint-ci
 
       - name: Check package dependencies
-        run: npm audit
+        run: |
+          cd backend
+          npm audit
