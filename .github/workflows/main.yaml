@@ -1,11 +1,11 @@
-name: Check code quality
+name: Main
 
 on: 
   push: 
     branches: 
       - '*'
 jobs:
-  backend:
+  Check_code_quality:
     runs-on: ubuntu-latest
 
     strategy:
