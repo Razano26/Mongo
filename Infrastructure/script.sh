@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Create a Docker Network
 docker network create mongoCluster
 
