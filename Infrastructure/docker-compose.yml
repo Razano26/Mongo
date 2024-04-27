@@ -11,9 +11,10 @@ services:
   DC1-Config-srv:
     image: mongo:4.4
     container_name: DC1-Config-srv
-    command: mongod --configsvr --replSet configrs --bind_ip_all --port 27019
+    command: mongod --configsvr --replSet configrs --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
     volumes:
       - DC1-Config-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC1
       - config-network
@@ -21,9 +22,10 @@ services:
   DC2-Config-srv:
     image: mongo:4.4
     container_name: DC2-Config-srv
-    command: mongod --configsvr --replSet configrs --bind_ip_all --port 27019
+    command: mongod --configsvr --replSet configrs --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
     volumes:
       - DC2-Config-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC2
       - config-network
@@ -31,9 +33,10 @@ services:
   DC3-Config-srv:
     image: mongo:4.4
     container_name: DC3-Config-srv
-    command: mongod --configsvr --replSet configrs --bind_ip_all --port 27019
+    command: mongod --configsvr --replSet configrs --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
     volumes:
       - DC3-Config-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC3
       - config-network
@@ -42,9 +45,10 @@ services:
   DC1-Shard1-srv:
     image: mongo:4.4
     container_name: DC1-Shard1-srv
-    command: mongod --shardsvr --replSet shard1 --bind_ip_all --port 27018
+    command: mongod --shardsvr --replSet shard1 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
     volumes:
       - DC1-Shard1-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC1
       - config-network
@@ -52,9 +56,10 @@ services:
   DC2-Shard1-srv:
     image: mongo:4.4
     container_name: DC2-Shard1-srv
-    command: mongod --shardsvr --replSet shard1 --bind_ip_all --port 27018
+    command: mongod --shardsvr --replSet shard1 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
     volumes:
       - DC2-Shard1-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC2
       - config-network
@@ -62,9 +67,10 @@ services:
   DC3-Shard1-srv:
     image: mongo:4.4
     container_name: DC3-Shard1-srv
-    command: mongod --shardsvr --replSet shard1 --bind_ip_all --port 27018
+    command: mongod --shardsvr --replSet shard1 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
     volumes:
       - DC3-Shard1-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC3
       - config-network
@@ -73,9 +79,10 @@ services:
   DC1-Shard2-srv:
     image: mongo:4.4
     container_name: DC1-Shard2-srv
-    command: mongod --shardsvr --replSet shard2 --bind_ip_all --port 27020
+    command: mongod --shardsvr --replSet shard2 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
     volumes:
       - DC1-Shard2-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC1
       - config-network
@@ -83,9 +90,10 @@ services:
   DC2-Shard2-srv:
     image: mongo:4.4
     container_name: DC2-Shard2-srv
-    command: mongod --shardsvr --replSet shard2 --bind_ip_all --port 27020
+    command: mongod --shardsvr --replSet shard2 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
     volumes:
       - DC2-Shard2-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC2
       - config-network
@@ -93,9 +101,10 @@ services:
   DC3-Shard2-srv:
     image: mongo:4.4
     container_name: DC3-Shard2-srv
-    command: mongod --shardsvr --replSet shard2 --bind_ip_all --port 27020
+    command: mongod --shardsvr --replSet shard2 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
     volumes:
       - DC3-Shard2-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC3
       - config-network
@@ -104,9 +113,10 @@ services:
   DC1-Shard3-srv:
     image: mongo:4.4
     container_name: DC1-Shard3-srv
-    command: mongod --shardsvr --replSet shard3 --bind_ip_all --port 27021
+    command: mongod --shardsvr --replSet shard3 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
     volumes:
       - DC1-Shard3-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC1
       - config-network
@@ -114,9 +124,10 @@ services:
   DC2-Shard3-srv:
     image: mongo:4.4
     container_name: DC2-Shard3-srv
-    command: mongod --shardsvr --replSet shard3 --bind_ip_all --port 27021
+    command: mongod --shardsvr --replSet shard3 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
     volumes:
       - DC2-Shard3-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC2
       - config-network
@@ -124,9 +135,10 @@ services:
   DC3-Shard3-srv:
     image: mongo:4.4
     container_name: DC3-Shard3-srv
-    command: mongod --shardsvr --replSet shard3 --bind_ip_all --port 27021
+    command: mongod --shardsvr --replSet shard3 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
     volumes:
       - DC3-Shard3-srv:/data/db
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC3
       - config-network
@@ -135,11 +147,13 @@ services:
   DC1-Mongos:
     image: mongo:4.4
     container_name: DC1-Mongos
-    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --bind_ip_all --port 27017
+    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27017
     depends_on:
       - DC1-Config-srv
       - DC2-Config-srv
       - DC3-Config-srv
+    volumes:
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC1
       - DC2
@@ -151,11 +165,13 @@ services:
   DC2-Mongos:
     image: mongo:4.4
     container_name: DC2-Mongos
-    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --bind_ip_all --port 27017
+    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27017
     depends_on:
       - DC1-Config-srv
       - DC2-Config-srv
       - DC3-Config-srv
+    volumes:
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
       - DC1
       - DC2
@@ -167,11 +183,14 @@ services:
   DC3-Mongos:
     image: mongo:4.4
     container_name: DC3-Mongos
-    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --bind_ip_all --port 27017
+    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27017
     depends_on:
       - DC1-Config-srv
       - DC2-Config-srv
       - DC3-Config-srv
+    volumes:
+      - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      
     networks:
       - DC1
       - DC2
