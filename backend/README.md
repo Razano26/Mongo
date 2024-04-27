@@ -31,6 +31,12 @@
 ```bash
 $ npm install
 ```
+## Import Data from CSV file to the Database
+
+```bash
+$ cd backend
+$ npm import
+```
 
 ## Running the app
 
