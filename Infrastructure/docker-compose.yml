@@ -4,6 +4,7 @@ networks:
   DC1:
   DC2:
   DC3:
+  config-network:
 
 services:
   # Config servers
@@ -15,6 +16,7 @@ services:
       - DC1-Config-srv:/data/db
     networks:
       - DC1
+      - config-network
   
   DC2-Config-srv:
     image: mongo:4.4
@@ -24,6 +26,7 @@ services:
       - DC2-Config-srv:/data/db
     networks:
       - DC2
+      - config-network
 
   DC3-Config-srv:
     image: mongo:4.4
@@ -33,6 +36,7 @@ services:
       - DC3-Config-srv:/data/db
     networks:
       - DC3
+      - config-network
 
   # Shard 1 servers
   DC1-Shard1-srv:
@@ -43,6 +47,7 @@ services:
       - DC1-Shard1-srv:/data/db
     networks:
       - DC1
+      - config-network
 
   DC2-Shard1-srv:
     image: mongo:4.4
@@ -52,6 +57,7 @@ services:
       - DC2-Shard1-srv:/data/db
     networks:
       - DC2
+      - config-network
   
   DC3-Shard1-srv:
     image: mongo:4.4
@@ -61,6 +67,7 @@ services:
       - DC3-Shard1-srv:/data/db
     networks:
       - DC3
+      - config-network
   
   # Shard 2 servers
   DC1-Shard2-srv:
@@ -71,6 +78,7 @@ services:
       - DC1-Shard2-srv:/data/db
     networks:
       - DC1
+      - config-network
   
   DC2-Shard2-srv:
     image: mongo:4.4
@@ -80,6 +88,7 @@ services:
       - DC2-Shard2-srv:/data/db
     networks:
       - DC2
+      - config-network
   
   DC3-Shard2-srv:
     image: mongo:4.4
@@ -89,6 +98,7 @@ services:
       - DC3-Shard2-srv:/data/db
     networks:
       - DC3
+      - config-network
 
   # Shard 3 servers
   DC1-Shard3-srv:
@@ -99,6 +109,7 @@ services:
       - DC1-Shard3-srv:/data/db
     networks:
       - DC1
+      - config-network
   
   DC2-Shard3-srv:
     image: mongo:4.4
@@ -108,6 +119,7 @@ services:
       - DC2-Shard3-srv:/data/db
     networks:
       - DC2
+      - config-network
   
   DC3-Shard3-srv:
     image: mongo:4.4
@@ -117,6 +129,7 @@ services:
       - DC3-Shard3-srv:/data/db
     networks:
       - DC3
+      - config-network
   
   # Mongos routers
   DC1-Mongos:
@@ -131,6 +144,7 @@ services:
       - DC1
       - DC2
       - DC3
+      - config-network
     ports:
       - 27017:27017
 
@@ -146,6 +160,7 @@ services:
       - DC1
       - DC2
       - DC3
+      - config-network
     ports:
       - 27018:27017
 
@@ -161,6 +176,7 @@ services:
       - DC1
       - DC2
       - DC3
+      - config-network
     ports:
       - 27019:27017
 
