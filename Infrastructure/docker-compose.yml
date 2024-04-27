@@ -1,51 +1,179 @@
 version: '3.8'
+
+networks:
+  DC1:
+  DC2:
+  DC3:
+
 services:
   # Config servers
-  configsvr:
+  DC1-Config-srv:
     image: mongo:4.4
+    container_name: DC1-Config-srv
     command: mongod --configsvr --replSet configrs --bind_ip_all --port 27019
     volumes:
-      - configsvrdata:/data/db
+      - DC1-Config-srv:/data/db
     networks:
-      - dc1
-
-  # Shard 1 servers (simulating DC1)
-  shard1svr:
+      - DC1
+  
+  DC2-Config-srv:
     image: mongo:4.4
+    container_name: DC2-Config-srv
+    command: mongod --configsvr --replSet configrs --bind_ip_all --port 27019
+    volumes:
+      - DC2-Config-srv:/data/db
+    networks:
+      - DC2
+
+  DC3-Config-srv:
+    image: mongo:4.4
+    container_name: DC3-Config-srv
+    command: mongod --configsvr --replSet configrs --bind_ip_all --port 27019
+    volumes:
+      - DC3-Config-srv:/data/db
+    networks:
+      - DC3
+
+  # Shard 1 servers
+  DC1-Shard1-srv:
+    image: mongo:4.4
+    container_name: DC1-Shard1-srv
     command: mongod --shardsvr --replSet shard1 --bind_ip_all --port 27018
     volumes:
-      - shard1data:/data/db
+      - DC1-Shard1-srv:/data/db
     networks:
-      - dc1
+      - DC1
 
-  # Shard 2 servers (simulating DC2)
-  shard2svr:
+  DC2-Shard1-srv:
     image: mongo:4.4
+    container_name: DC2-Shard1-srv
+    command: mongod --shardsvr --replSet shard1 --bind_ip_all --port 27018
+    volumes:
+      - DC2-Shard1-srv:/data/db
+    networks:
+      - DC2
+  
+  DC3-Shard1-srv:
+    image: mongo:4.4
+    container_name: DC3-Shard1-srv
+    command: mongod --shardsvr --replSet shard1 --bind_ip_all --port 27018
+    volumes:
+      - DC3-Shard1-srv:/data/db
+    networks:
+      - DC3
+  
+  # Shard 2 servers
+  DC1-Shard2-srv:
+    image: mongo:4.4
+    container_name: DC1-Shard2-srv
     command: mongod --shardsvr --replSet shard2 --bind_ip_all --port 27020
     volumes:
-      - shard2data:/data/db
+      - DC1-Shard2-srv:/data/db
     networks:
-      - dc2
-
-  # Mongos routers
-  mongos:
+      - DC1
+  
+  DC2-Shard2-srv:
     image: mongo:4.4
-    command: mongos --configdb configrs/configsvr:27019 --bind_ip_all --port 27017
-    depends_on:
-      - configsvr
+    container_name: DC2-Shard2-srv
+    command: mongod --shardsvr --replSet shard2 --bind_ip_all --port 27020
+    volumes:
+      - DC2-Shard2-srv:/data/db
     networks:
-      - dc1
-      - dc2
-      - dc3
+      - DC2
+  
+  DC3-Shard2-srv:
+    image: mongo:4.4
+    container_name: DC3-Shard2-srv
+    command: mongod --shardsvr --replSet shard2 --bind_ip_all --port 27020
+    volumes:
+      - DC3-Shard2-srv:/data/db
+    networks:
+      - DC3
+
+  # Shard 3 servers
+  DC1-Shard3-srv:
+    image: mongo:4.4
+    container_name: DC1-Shard3-srv
+    command: mongod --shardsvr --replSet shard3 --bind_ip_all --port 27021
+    volumes:
+      - DC1-Shard3-srv:/data/db
+    networks:
+      - DC1
+  
+  DC2-Shard3-srv:
+    image: mongo:4.4
+    container_name: DC2-Shard3-srv
+    command: mongod --shardsvr --replSet shard3 --bind_ip_all --port 27021
+    volumes:
+      - DC2-Shard3-srv:/data/db
+    networks:
+      - DC2
+  
+  DC3-Shard3-srv:
+    image: mongo:4.4
+    container_name: DC3-Shard3-srv
+    command: mongod --shardsvr --replSet shard3 --bind_ip_all --port 27021
+    volumes:
+      - DC3-Shard3-srv:/data/db
+    networks:
+      - DC3
+  
+  # Mongos routers
+  DC1-Mongos:
+    image: mongo:4.4
+    container_name: DC1-Mongos
+    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --bind_ip_all --port 27017
+    depends_on:
+      - DC1-Config-srv
+      - DC2-Config-srv
+      - DC3-Config-srv
+    networks:
+      - DC1
+      - DC2
+      - DC3
     ports:
       - 27017:27017
 
-networks:
-  dc1:
-  dc2:
-  dc3:
+  DC2-Mongos:
+    image: mongo:4.4
+    container_name: DC2-Mongos
+    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --bind_ip_all --port 27017
+    depends_on:
+      - DC1-Config-srv
+      - DC2-Config-srv
+      - DC3-Config-srv
+    networks:
+      - DC1
+      - DC2
+      - DC3
+    ports:
+      - 27018:27017
+
+  DC3-Mongos:
+    image: mongo:4.4
+    container_name: DC3-Mongos
+    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --bind_ip_all --port 27017
+    depends_on:
+      - DC1-Config-srv
+      - DC2-Config-srv
+      - DC3-Config-srv
+    networks:
+      - DC1
+      - DC2
+      - DC3
+    ports:
+      - 27019:27017
 
 volumes:
-  configsvrdata:
-  shard1data:
-  shard2data:
+  DC1-Config-srv:
+  DC2-Config-srv:
+  DC3-Config-srv:
+  DC1-Shard1-srv:
+  DC2-Shard1-srv:
+  DC3-Shard1-srv:
+  DC1-Shard2-srv:
+  DC2-Shard2-srv:
+  DC3-Shard2-srv:
+  DC1-Shard3-srv:
+  DC2-Shard3-srv:
+  DC3-Shard3-srv:
