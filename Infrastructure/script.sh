@@ -1,24 +1,40 @@
 #!/bin/bash
+echo "Waiting for MongoDB servers to start..."
+sleep 10
 
-# Create a Docker Network
-docker network create mongoCluster
+echo "Initiating replica set for config servers..."
+docker exec -it infrastructure-configsvr-1 mongo --port 27019 --eval "
+rs.initiate({
+  _id: 'configrs',
+  configsvr: true,
+  members: [{ _id: 0, host: 'infrastructure-configsvr-1:27019' }]
+});
+"
 
-# Start MongoDB Instances
-docker run -d --rm -p 27017:27017 --name mongo1 --network mongoCluster mongo:5 mongod --replSet myReplicaSet --bind_ip localhost,mongo1
-docker run -d --rm -p 27018:27017 --name mongo2 --network mongoCluster mongo:5 mongod --replSet myReplicaSet --bind_ip localhost,mongo2
-docker run -d --rm -p 27019:27017 --name mongo3 --network mongoCluster mongo:5 mongod --replSet myReplicaSet --bind_ip localhost,mongo3
+echo "Waiting for config replica set to initialize..."
+sleep 10
 
-# Initiate the Replica Set
-docker exec -it mongo1 mongosh --eval "rs.initiate({
- _id: \"myReplicaSet\",
- members: [
-   {_id: 0, host: \"mongo1\"},
-   {_id: 1, host: \"mongo2\"},
-   {_id: 2, host: \"mongo3\"}
- ]
-})"
+echo "Initiating replica set for Shard 1..."
+docker exec -it infrastructure-shard1svr-1 mongo --port 27018 --eval "
+rs.initiate({
+  _id: 'shard1',
+  members: [{ _id: 0, host: 'infrastructure-shard1svr-1:27018' }]
+});
+"
 
-# Test and Verify the Replica Set
-docker exec -it mongo1 mongosh --eval "rs.status()"
-docker stop mongo1
-docker exec -it mongo2 mongosh --eval "rs.status()"
+echo "Initiating replica set for Shard 2..."
+docker exec -it infrastructure-shard2svr-1 mongo --port 27020 --eval "
+rs.initiate({
+  _id: 'shard2',
+  members: [{ _id: 0, host: 'infrastructure-shard2svr-1:27020' }]
+});
+"
+
+echo "Waiting for all replica sets to initialize..."
+sleep 20
+
+echo "Adding shards to the cluster..."
+docker exec -it infrastructure-mongos-1 mongo --eval "
+sh.addShard('shard1/infrastructure-shard1svr-1:27018');
+sh.addShard('shard2/infrastructure-shard2svr-1:27020');
+"

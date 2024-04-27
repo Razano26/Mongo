@@ -1,202 +1,51 @@
-version: '3.7'
-
+version: '3.8'
 services:
-  # Config servers (3 servers for redundancy)
-  DC1CFG:
-    image: mongo:latest
+  # Config servers
+  configsvr:
+    image: mongo:4.4
+    command: mongod --configsvr --replSet configrs --bind_ip_all --port 27019
     volumes:
-      - DC1CFG:/data/db
-    ports:
-      - "27120:27017"
-    command: mongod --configsvr --replSet configReplSet --bind_ip_all
+      - configsvrdata:/data/db
     networks:
-      - config_network
+      - dc1
 
-  DC2CFG:
-    image: mongo:latest
+  # Shard 1 servers (simulating DC1)
+  shard1svr:
+    image: mongo:4.4
+    command: mongod --shardsvr --replSet shard1 --bind_ip_all --port 27018
     volumes:
-      - DC2CFG:/data/db
-    ports:
-      - "27220:27017"
-    command: mongod --configsvr --replSet configReplSet --bind_ip_all
+      - shard1data:/data/db
     networks:
-      - config_network
+      - dc1
 
-  DC3CFG:
-    image: mongo:latest
+  # Shard 2 servers (simulating DC2)
+  shard2svr:
+    image: mongo:4.4
+    command: mongod --shardsvr --replSet shard2 --bind_ip_all --port 27020
     volumes:
-      - DC3CFG:/data/db
-    ports:
-      - "27320:27017"
-    command: mongod --configsvr --replSet configReplSet --bind_ip_all
+      - shard2data:/data/db
     networks:
-      - config_network
+      - dc2
 
-  # Mongos (Query Routers)
+  # Mongos routers
   mongos:
-    image: mongo:latest
+    image: mongo:4.4
+    command: mongos --configdb configrs/configsvr:27019 --bind_ip_all --port 27017
     depends_on:
-      - DC1CFG
-      - DC2CFG
-      - DC3CFG
-    ports:
-      - "27017:27017"
-    command: mongos --configdb configReplSet/DC1CFG:27017,DC2CFG:27017,DC3CFG:27017 --bind_ip_all
+      - configsvr
     networks:
-      - config_network
-      - DC1
-      - DC2
-      - DC3
-
-  # Shard servers (5 per datacenter, total of 15)
-  # Datacenter 1
-  DC1SRV1:
-    image: mongo:latest
-    volumes:
-      - DC1SRV1:/data/db
+      - dc1
+      - dc2
+      - dc3
     ports:
-      - "27101:27017"
-    command: mongod --shardsvr --replSet dc1 --bind_ip_all
-    networks:
-      - DC1
-
-  DC1SRV2:
-    image: mongo:latest
-    volumes:
-      - DC1SRV2:/data/db
-    ports:
-      - "27102:27017"
-    command: mongod --shardsvr --replSet dc1 --bind_ip_all
-    networks:
-      - DC1
-
-  DC1SRV3:
-    image: mongo:latest
-    volumes:
-      - DC1SRV3:/data/db
-    ports:
-      - "27103:27017"
-    command: mongod --shardsvr --replSet dc1 --bind_ip_all
-    networks:
-      - DC1
-
-  DC1SRV4:
-    image: mongo:latest
-    volumes:
-      - DC1SRV4:/data/db
-    ports:
-      - "27104:27017"
-    command: mongod --shardsvr --replSet dc1 --bind_ip_all
-    networks:
-      - DC1
-
-  # Datacenter 2
-  DC2SRV1:
-    image: mongo:latest
-    volumes:
-      - DC2SRV1:/data/db
-    ports:
-      - "27201:27017"
-    command: mongod --shardsvr --replSet dc2 --bind_ip_all
-    networks:
-      - DC2
-
-  DC2SRV2:
-    image: mongo:latest
-    volumes:
-      - DC2SRV2:/data/db
-    ports:
-      - "27202:27017"
-    command: mongod --shardsvr --replSet dc2 --bind_ip_all
-    networks:
-      - DC2
-
-  DC2SRV3:
-    image: mongo:latest
-    volumes:
-      - DC2SRV3:/data/db
-    ports:
-      - "27203:27017"
-    command: mongod --shardsvr --replSet dc2 --bind_ip_all
-    networks:
-      - DC2
-
-  DC2SRV4:
-    image: mongo:latest
-    volumes:
-      - DC2SRV4:/data/db
-    ports:
-      - "27204:27017"
-    command: mongod --shardsvr --replSet dc2 --bind_ip_all
-    networks:
-      - DC2
-
-  # Datacenter 3
-  DC3SRV1:
-    image: mongo:latest
-    volumes:
-      - DC3SRV1:/data/db
-    ports:
-      - "27301:27017"
-    command: mongod --shardsvr --replSet dc3 --bind_ip_all
-    networks:
-      - DC3
-
-  DC3SRV2:
-    image: mongo:latest
-    volumes:
-      - DC3SRV2:/data/db
-    ports:
-      - "27302:27017"
-    command: mongod --shardsvr --replSet dc3 --bind_ip_all
-    networks:
-      - DC3
-
-  DC3SRV3:
-    image: mongo:latest
-    volumes:
-      - DC3SRV3:/data/db
-    ports:
-      - "27303:27017"
-    command: mongod --shardsvr --replSet dc3 --bind_ip_all
-    networks:
-      - DC3
-
-  DC3SRV4:
-    image: mongo:latest
-    volumes:
-      - DC3SRV4:/data/db
-    ports:
-      - "27304:27017"
-    command: mongod --shardsvr --replSet dc3 --bind_ip_all
-    networks:
-      - DC3
+      - 27017:27017
 
 networks:
-  default:
-    driver: bridge
-  config_network:
-    driver: bridge
-  DC1:
-    driver: bridge
-  DC2:
-    driver: bridge
-  DC3:
-    driver: bridge
+  dc1:
+  dc2:
+  dc3:
 
 volumes:
-  DC1CFG:
-  DC2CFG:
-  DC3CFG:
-  DC1SRV1:
-  DC1SRV2:
-  DC1SRV3:
-  DC1SRV4:
-  DC2SRV1:
-  DC2SRV2:
-  DC2SRV3:
-  DC2SRV4:
-  DC3SRV1:
-  DC3SRV2:
-  DC3SRV3:
-  DC3SRV4:
+  configsvrdata:
+  shard1data:
+  shard2data:
