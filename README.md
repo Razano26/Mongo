@@ -13,3 +13,10 @@ For detailed guidance on setting up and managing this Docker-based simulation, r
 - **Check** the status of the containers with `docker-compose ps`.
 
 For more details, including how to shut down and clean up the environment, please consult the README in the `Infrastructure` directory.
+
+## Import data from the CSV file to the Database
+
+```bash
+$ cd backend
+$ npm run import
+```
