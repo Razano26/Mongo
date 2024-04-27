@@ -4,7 +4,7 @@ import csv from 'csv-parser';
 import { MongoClient } from 'mongodb';
 
 // Configuration de la connexion à MongoDB
-const uri = 'mongodb://myuser:mypassword@localhost:27017';
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 const client = new MongoClient(uri);
 
 // Nom de la base de données
