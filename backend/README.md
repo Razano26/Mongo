@@ -35,7 +35,7 @@ $ npm install
 
 ```bash
 $ cd backend
-$ npm import
+$ npm run import
 ```
 
 ## Running the app
