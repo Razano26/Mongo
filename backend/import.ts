@@ -1,7 +1,7 @@
 // Importation des modules nécessaires
-const fs = require('fs');
-const csv = require('csv-parser');
-const { MongoClient } = require('mongodb');
+import fs from 'fs';
+import csv from 'csv-parser';
+import { MongoClient } from 'mongodb';
 
 // Configuration de la connexion à MongoDB
 const uri = 'mongodb://myuser:mypassword@localhost:27017';
@@ -55,7 +55,7 @@ async function main() {
           brand: data.brand,
           openingHours: data.opening_hours,
           timestamp: data.osm_timestamp,
-          ...tagsData, 
+          ...tagsData,
         };
         // Ajout des données à la bonne collection dans l'objet des résultats
         if (!results[cleanData.amenity]) {
