@@ -11,7 +11,10 @@ services:
   DC1-Config-srv:
     image: mongo:4.4
     container_name: DC1-Config-srv
-    command: mongod --configsvr --replSet configrs --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
+    command: mongod --configsvr --replSet configrs --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC1-Config-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -22,7 +25,10 @@ services:
   DC2-Config-srv:
     image: mongo:4.4
     container_name: DC2-Config-srv
-    command: mongod --configsvr --replSet configrs --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
+    command: mongod --configsvr --replSet configrs --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC2-Config-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -33,7 +39,10 @@ services:
   DC3-Config-srv:
     image: mongo:4.4
     container_name: DC3-Config-srv
-    command: mongod --configsvr --replSet configrs --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
+    command: mongod --configsvr --replSet configrs --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC3-Config-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -45,7 +54,10 @@ services:
   DC1-Shard1-srv:
     image: mongo:4.4
     container_name: DC1-Shard1-srv
-    command: mongod --shardsvr --replSet shard1 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
+    command: mongod --shardsvr --replSet shard1 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC1-Shard1-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -56,7 +68,10 @@ services:
   DC2-Shard1-srv:
     image: mongo:4.4
     container_name: DC2-Shard1-srv
-    command: mongod --shardsvr --replSet shard1 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
+    command: mongod --shardsvr --replSet shard1 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC2-Shard1-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -67,7 +82,10 @@ services:
   DC3-Shard1-srv:
     image: mongo:4.4
     container_name: DC3-Shard1-srv
-    command: mongod --shardsvr --replSet shard1 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
+    command: mongod --shardsvr --replSet shard1 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC3-Shard1-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -79,7 +97,10 @@ services:
   DC1-Shard2-srv:
     image: mongo:4.4
     container_name: DC1-Shard2-srv
-    command: mongod --shardsvr --replSet shard2 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
+    command: mongod --shardsvr --replSet shard2 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC1-Shard2-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -90,7 +111,10 @@ services:
   DC2-Shard2-srv:
     image: mongo:4.4
     container_name: DC2-Shard2-srv
-    command: mongod --shardsvr --replSet shard2 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
+    command: mongod --shardsvr --replSet shard2 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC2-Shard2-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -101,7 +125,10 @@ services:
   DC3-Shard2-srv:
     image: mongo:4.4
     container_name: DC3-Shard2-srv
-    command: mongod --shardsvr --replSet shard2 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
+    command: mongod --shardsvr --replSet shard2 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC3-Shard2-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -113,7 +140,10 @@ services:
   DC1-Shard3-srv:
     image: mongo:4.4
     container_name: DC1-Shard3-srv
-    command: mongod --shardsvr --replSet shard3 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
+    command: mongod --shardsvr --replSet shard3 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC1-Shard3-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -124,7 +154,10 @@ services:
   DC2-Shard3-srv:
     image: mongo:4.4
     container_name: DC2-Shard3-srv
-    command: mongod --shardsvr --replSet shard3 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
+    command: mongod --shardsvr --replSet shard3 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC2-Shard3-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -135,7 +168,10 @@ services:
   DC3-Shard3-srv:
     image: mongo:4.4
     container_name: DC3-Shard3-srv
-    command: mongod --shardsvr --replSet shard3 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
+    command: mongod --shardsvr --replSet shard3 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - DC3-Shard3-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
@@ -152,6 +188,9 @@ services:
       - DC1-Config-srv
       - DC2-Config-srv
       - DC3-Config-srv
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
@@ -170,6 +209,9 @@ services:
       - DC1-Config-srv
       - DC2-Config-srv
       - DC3-Config-srv
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
     networks:
@@ -188,6 +230,9 @@ services:
       - DC1-Config-srv
       - DC2-Config-srv
       - DC3-Config-srv
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: H@28kHqk!oJw
     volumes:
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       
