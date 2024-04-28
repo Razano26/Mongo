@@ -10,7 +10,9 @@ import { PlacesModule } from './places/places.module';
   imports: [
     MongooseModule.forRoot(
       process.env.MONGODB_URI || 'mongodb://localhost:27017',
-      { dbName: 'mtp_open_data' },
+      {
+        dbName: 'mtp_open_data',
+      },
     ),
     AuthModule,
     UsersModule,
