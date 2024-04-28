@@ -86,10 +86,10 @@ This architecture is designed to maximize uptime and performance for application
 
 ### Starting the MongoDB Cluster
 1. **Prerequisites**: Ensure Docker and Docker Compose are installed on your system.
-2. **Starting the Environment**:
-   - Navigate to the directory containing `docker-compose.yml`.
-   - Run `./init-cluster.sh` to start and initialize the MongoDB cluster.
-3. **Accessing the MongoDB Shell**:
+2. **Move to the Infrastructure directory**: `cd Infrastructure`
+3. **Configuration**: Copy the `.env.template` file as `.env` and adjust the usernames, passwords. `cp .env.template .env && nano .env`
+4. **Starting the Environment**: Run `./init-cluster.sh` to start and initialize the MongoDB cluster.
+5. **Accessing the MongoDB Shell**:
    - To access the MongoDB shell for a specific server, run `docker exec -it <container_name> mongo`.
    - For example, to access the shell of the Mongos router in Data Center 1, run `docker exec -it DC1-Mongos mongo`.
    - You can also access the shell of the config servers and shard servers using the same command.

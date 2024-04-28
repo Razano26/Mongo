@@ -32,9 +32,9 @@ For detailed refer to the documentation available in the [Infrastructure README]
 ### Quick Start
 
 1. **Prerequisites**: Ensure Docker and Docker Compose are installed on your system.
-2. **Starting the Environment**:
-   - Navigate to the directory containing `docker-compose.yml`.
-   - Run `./init-cluster.sh` to start and initialize the MongoDB cluster.
+2. **Move to the Infrastructure directory**: `cd Infrastructure`
+3. **Configuration**: Copy the `.env.template` file as `.env` and adjust the usernames, passwords. `cp .env.template .env && nano .env`
+4. **Starting the Environment**: Run `./init-cluster.sh` to start and initialize the MongoDB cluster.
 
 For more details, including how to shut down and clean up the environment, please consult the README in the `Infrastructure` directory.
 

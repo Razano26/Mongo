@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# User credentials
-MONGO_USER='root'
-MONGO_PASSWORD='H@28kHqk!oJw'
+source .env
 
 # Setup keyfile for security inter node
 echo "Setting up keyfile for security inter node..."
