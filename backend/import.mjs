@@ -2,6 +2,10 @@
 import fs from 'fs';
 import csv from 'csv-parser';
 import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
+
+// Configuration de dotenv
+dotenv.config();
 
 // Configuration de la connexion à MongoDB
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
