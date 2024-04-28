@@ -2,10 +2,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Place {
-  @Prop({ required: true })
+  @Prop()
   amenity: string; // 'bar', 'cafe', 'restaurant', etc.
 
-  @Prop({ required: true })
+  @Prop()
   name: string;
 
   @Prop()
