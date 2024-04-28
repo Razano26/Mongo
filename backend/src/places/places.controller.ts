@@ -1,19 +1,14 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { PlacesService } from './places.service';
+import { Bar } from './bar/schemas/bar.schema';
+import { Restaurant } from './restaurant/schemas/restaurant.schema';
 
 @Controller('places')
 export class PlacesController {
   constructor(private readonly placesService: PlacesService) {}
 
-  // Route pour récupérer toutes les places, indépendamment de leur type
   @Get()
-  async getAllPlaces() {
-    return await this.placesService.findAllPlaces();
-  }
-
-  // Route pour récupérer toutes les places d'un type spécifique
-  @Get(':type')
-  async getPlacesByType(@Param('type') type: string) {
-    return await this.placesService.findPlacesByType(type);
+  async getAll(): Promise<(Bar | Restaurant)[]> {
+    return this.placesService.getAll();
   }
 }

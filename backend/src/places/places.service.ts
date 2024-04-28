@@ -1,19 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Place } from './schemas/place.schema';
+import { Bar } from './bar/schemas/bar.schema';
+import { Restaurant } from './restaurant/schemas/restaurant.schema';
 
 @Injectable()
 export class PlacesService {
   constructor(
-    @InjectModel(Place.name) private readonly placeModel: Model<Place>,
+    @InjectModel(Bar.name) private barModel: Model<Bar>,
+    @InjectModel(Restaurant.name) private restaurantModel: Model<Restaurant>,
   ) {}
 
-  async findAllPlaces() {
-    return await this.placeModel.find().exec();
+  async getAll(): Promise<(Bar | Restaurant)[]> {
+    const bars = await this.barModel.find();
+  
+    const restaurants = await this.restaurantModel.find();
+  
+    return [...bars, ...restaurants];
   }
 
-  async findPlacesByType(type: string) {
-    return await this.placeModel.find({ type }).exec();
-  }
 }
