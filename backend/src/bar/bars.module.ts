@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { BarsService } from './bars.service';
-import { BarsController } from './bars.controller';
 import { Bar, BarSchema } from '../schemas/Bar.schema';
+import { BarsController } from './bars.controller';
+import { BarsService } from './bars.service';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: Bar.name, schema: BarSchema }])],

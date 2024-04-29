@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 
 import { Bar } from '../schemas/Bar.schema';
 import { CreateBarDto } from './dto/createBar.dto';
+import { PatchBarDto } from './dto/patchBar.dto';
 
 @Injectable()
 export class BarsService {
@@ -17,9 +18,9 @@ export class BarsService {
     return createdBar;
   }
 
-  async update(id: string, createBarDto: CreateBarDto) {
+  async update(id: string, patchBarDto: PatchBarDto) {
     const updatedBar = await this.barModel
-      .findByIdAndUpdate(id, createBarDto, { new: true })
+      .findByIdAndUpdate(id, patchBarDto, { new: true })
       .exec();
     return updatedBar;
   }

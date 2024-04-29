@@ -8,8 +8,8 @@ import {
   Post,
 } from '@nestjs/common';
 
-import { BarsService } from './bars.service';
 import { Bar } from '../schemas/Bar.schema';
+import { BarsService } from './bars.service';
 import { CreateBarDto } from './dto/createBar.dto';
 import { PatchBarDto } from './dto/patchBar.dto';
 
