@@ -13,8 +13,7 @@ export class BarsService {
   ) {}
 
   async create(createBarDto: CreateBarDto): Promise<Bar> {
-    const createdBar =
-      await this.barModel.create(createBarDto);
+    const createdBar = await this.barModel.create(createBarDto);
     return createdBar;
   }
 
@@ -37,9 +36,7 @@ export class BarsService {
   }
 
   async delete(id: string) {
-    const deletedBar = await this.barModel
-      .findByIdAndDelete(id)
-      .exec();
+    const deletedBar = await this.barModel.findByIdAndDelete(id).exec();
     return deletedBar;
   }
 }

@@ -12,8 +12,7 @@ export class PubsService {
   ) {}
 
   async create(createPubDto: CreatePubDto): Promise<Pub> {
-    const createdPub =
-      await this.pubModel.create(createPubDto);
+    const createdPub = await this.pubModel.create(createPubDto);
     return createdPub;
   }
 
@@ -36,9 +35,7 @@ export class PubsService {
   }
 
   async delete(id: string) {
-    const deletedPub = await this.pubModel
-      .findByIdAndDelete(id)
-      .exec();
+    const deletedPub = await this.pubModel.findByIdAndDelete(id).exec();
     return deletedPub;
   }
 }

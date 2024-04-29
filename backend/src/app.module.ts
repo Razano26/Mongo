@@ -6,7 +6,6 @@ import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BarsModule } from './bar/bars.module';
 import { RestaurantsModule } from './restaurant/restaurants.module';
-import { PlacesModule } from './places/places.module';
 import { PubsModule } from './pub/pubs.module';
 import { Fast_FoodsModule } from './fast_food/fast_food.module';
 
@@ -24,7 +23,8 @@ import { Fast_FoodsModule } from './fast_food/fast_food.module';
     RestaurantsModule,
     PubsModule,
     Fast_FoodsModule,
-    PlacesModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

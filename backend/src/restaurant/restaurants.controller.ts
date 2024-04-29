@@ -1,4 +1,12 @@
-import { Body,Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 
 import { RestaurantsService } from './restaurants.service';
 import { Restaurant } from '../schemas/restaurant.schema';
@@ -15,7 +23,9 @@ export class RestaurantsController {
   }
 
   @Patch(':id') // Route pour mettre à jour un restaurant par son id : http://localhost:3000/restaurants/{id}
-  async update(@Param('id') id: string, @Body() patchRestaurantDto: PatchRestaurantDto,
+  async update(
+    @Param('id') id: string,
+    @Body() patchRestaurantDto: PatchRestaurantDto,
   ) {
     return this.restaurantsService.update(id, patchRestaurantDto);
   }
