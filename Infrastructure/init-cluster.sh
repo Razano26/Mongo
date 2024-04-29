@@ -9,7 +9,7 @@ chmod 400 mongodb-keyfile
 
 # Start MongoDB servers
 echo "Starting MongoDB servers..."
-docker-compose up -d
+docker compose up -d
 echo "Waiting for MongoDB servers to start..."
 sleep 10
 
