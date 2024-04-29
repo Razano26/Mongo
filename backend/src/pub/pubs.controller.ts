@@ -7,10 +7,10 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { PubsService } from './pubs.service';
 import { Pub } from '../schemas/Pub.schema';
 import { CreatePubDto } from './dto/createPub.dto';
 import { PatchPubDto } from './dto/patchPub.dto';
+import { PubsService } from './pubs.service';
 
 @Controller('pubs')
 export class PubsController {

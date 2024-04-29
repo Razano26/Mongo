@@ -1,4 +1,11 @@
+import { IsOptional, IsString } from 'class-validator';
+
 export class PatchPubDto {
-  name: string;
-  brand: string;
+  @IsString()
+  @IsOptional()
+  name?: string;
+
+  @IsString()
+  @IsOptional()
+  brand?: string;
 }
