@@ -8,5 +8,5 @@ console.log(db.fast_food.getShardDistribution());
 console.log(db.ice_cream.getShardDistribution());
 console.log(db.pub.getShardDistribution());
 console.log(db.restaurant.getShardDistribution());
-// console.log(db.users.getShardDistribution());
-// console.log(db.tags.getShardDistribution());
+console.log(db.users.getShardDistribution());
+console.log(db.tags.getShardDistribution());
