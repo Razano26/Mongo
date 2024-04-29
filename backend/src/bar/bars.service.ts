@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Bar } from '../schemas/Bar.schema';
+import { Bar } from '../schemas/bar.schema';
 import { CreateBarDto } from './dto/createBar.dto';
 import { PatchBarDto } from './dto/patchBar.dto';
 
