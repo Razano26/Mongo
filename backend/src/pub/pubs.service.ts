@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Pub } from '../schemas/pub.schema';
-import { CreatePubDto } from './dto/create-pub.dto';
+import { Pub } from '../schemas/Pub.schema';
+import { CreatePubDto } from './dto/createPub.dto';
 
 @Injectable()
 export class PubsService {

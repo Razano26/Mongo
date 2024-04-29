@@ -9,9 +9,9 @@ import {
 } from '@nestjs/common';
 
 import { RestaurantsService } from './restaurants.service';
-import { Restaurant } from '../schemas/restaurant.schema';
-import { CreateRestaurantDto } from './dto/create-restaurant.dto';
-import { PatchRestaurantDto } from './dto/patch-restaurant.dto';
+import { Restaurant } from '../schemas/Restaurant.schema';
+import { CreateRestaurantDto } from './dto/createRestaurant.dto';
+import { PatchRestaurantDto } from './dto/patchRestaurant.dto';
 
 @Controller('restaurants')
 export class RestaurantsController {
