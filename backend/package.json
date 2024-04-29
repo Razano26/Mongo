@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "docs": "npx @compodoc/compodoc -p tsconfig.json -s",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -43,6 +44,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.24",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
