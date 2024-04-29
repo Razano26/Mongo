@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 @Schema({ collection: 'bar' })
 export class Bar extends Document {
   @Prop()
-  amenity: string; 
+  amenity: string;
 
   @Prop()
   name: string;

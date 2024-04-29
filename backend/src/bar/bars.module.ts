@@ -6,11 +6,7 @@ import { BarsController } from './bars.controller';
 import { Bar, BarSchema } from '../schemas/bar.schema';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: Bar.name, schema: BarSchema },
-    ]),
-  ],
+  imports: [MongooseModule.forFeature([{ name: Bar.name, schema: BarSchema }])],
   controllers: [BarsController],
   providers: [BarsService],
 })

@@ -6,11 +6,7 @@ import { PubsController } from './pubs.controller';
 import { Pub, PubSchema } from '../schemas/pub.schema';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: Pub.name, schema: PubSchema },
-    ]),
-  ],
+  imports: [MongooseModule.forFeature([{ name: Pub.name, schema: PubSchema }])],
   controllers: [PubsController],
   providers: [PubsService],
 })
