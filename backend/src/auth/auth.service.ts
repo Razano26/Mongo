@@ -40,10 +40,18 @@ export class AuthService {
 
     // Create the user
     const newUser = new User();
+    newUser.id = uuid();
     newUser.username = username;
     newUser.password = hashedPassword;
 
     const user = await this.userService.create(newUser);
+
+    user.password = undefined;
+
+    const accessToken = await this.accessToken(user);
+    const refreshToken = await this.refreshToken(user);
+
+    return { user, accessToken, refreshToken };
   }
 
   async loginUser({ username, password }: AuthPayloadDto) {
@@ -58,7 +66,8 @@ export class AuthService {
 
   async accessToken(user: any) {
     const payload = {
-      id: user._id,
+      _id: user._id,
+      id: user.id,
       username: user.username,
     };
     return this.jwtService.sign(payload);
@@ -67,7 +76,8 @@ export class AuthService {
   async refreshToken(user: any) {
     const tokenId = uuid();
     const payload = {
-      id: user._id,
+      _id: user._id,
+      id: user.id,
       username: user.username,
       tokenId: tokenId,
     };

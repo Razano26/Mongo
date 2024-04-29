@@ -19,6 +19,7 @@ export class AuthController {
     return req.user;
   }
 
+  @Public()
   @Post('register')
   register(@Body() authPayload: AuthPayloadDto) {
     return this.authService.register(authPayload);
