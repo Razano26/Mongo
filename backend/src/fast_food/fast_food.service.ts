@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Fast_Food } from '../schemas/fast_food.schema';
-import { CreateFast_FoodDto } from './dto/create-fast_food.dto';
+import { Fast_Food } from '../schemas/Fast_food.schema';
+import { CreateFast_FoodDto } from './dto/createFast_food.dto';
 
 @Injectable()
 export class Fast_FoodsService {

@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Bar } from '../schemas/bar.schema';
-import { CreateBarDto } from './dto/create-bar.dto';
+import { Bar } from '../schemas/Bar.schema';
+import { CreateBarDto } from './dto/createBar.dto';
 
 @Injectable()
 export class BarsService {

@@ -9,9 +9,9 @@ import {
 } from '@nestjs/common';
 
 import { BarsService } from './bars.service';
-import { Bar } from '../schemas/bar.schema';
-import { CreateBarDto } from './dto/create-bar.dto';
-import { PatchBarDto } from './dto/patch-bar.dto';
+import { Bar } from '../schemas/Bar.schema';
+import { CreateBarDto } from './dto/createBar.dto';
+import { PatchBarDto } from './dto/patchBar.dto';
 
 @Controller('bars')
 export class BarsController {

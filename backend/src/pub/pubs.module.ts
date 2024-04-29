@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PubsService } from './pubs.service';
 import { PubsController } from './pubs.controller';
 
-import { Pub, PubSchema } from '../schemas/pub.schema';
+import { Pub, PubSchema } from '../schemas/Pub.schema';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: Pub.name, schema: PubSchema }])],

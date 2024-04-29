@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { BarsService } from './bars.service';
 import { BarsController } from './bars.controller';
-import { Bar, BarSchema } from '../schemas/bar.schema';
+import { Bar, BarSchema } from '../schemas/Bar.schema';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: Bar.name, schema: BarSchema }])],
