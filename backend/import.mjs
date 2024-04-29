@@ -33,6 +33,7 @@ function parseTags(tagsString) {
 }
 
 // Fonction principale
+// Fonction principale
 async function main() {
   try {
     // Connexion à MongoDB
@@ -40,8 +41,9 @@ async function main() {
     console.log('Connecté à MongoDB');
     const db = client.db(dbName);
 
-    // Objet pour stocker les résultats
+    // Objets pour stocker les résultats et les tags
     const results = {};
+    const tagsCollection = [];
 
     // Lecture du fichier CSV
     fs.createReadStream('../Data/OSM_Metropole_restauration_bar.csv')
@@ -51,14 +53,10 @@ async function main() {
         const tagsData = parseTags(data.tags);
         // Création d'un objet avec les données nettoyées
         const cleanData = {
-          osmId: data.osm_id,
-          street: data.addr_street,
-          houseNumber: data.addr_housenumber,
           amenity: data.amenity,
           name: data.name,
           brand: data.brand,
           openingHours: data.opening_hours,
-          timestamp: data.osm_timestamp,
           ...tagsData,
         };
         // Ajout des données à la bonne collection dans l'objet des résultats
@@ -66,6 +64,16 @@ async function main() {
           results[cleanData.amenity] = [];
         }
         results[cleanData.amenity].push(cleanData);
+
+        // Ajout des tags, id et brand à la collection des tags
+        // Cette table sera utilisé pour les aggregations
+        tagsCollection.push({
+          _id: data._id,
+          name: data.name,
+          amenity: data.amenity,
+          brand: data.brand,
+          sport: tagsData.sport,
+        });
       })
       .on('end', async () => {
         // Insertion des données dans MongoDB
@@ -79,6 +87,16 @@ async function main() {
             `Insertion de ${results[amenity].length} enregistrements dans la collection ${amenity} réussie.`,
           );
         }
+
+        // Insertion des tags dans leur propre collection
+        if (tagsCollection.length > 0) {
+          const tagsDbCollection = db.collection('tags');
+          await tagsDbCollection.insertMany(tagsCollection);
+          console.log(
+            `Insertion de ${tagsCollection.length} enregistrements dans la collection tags réussie.`,
+          );
+        }
+
         // Fermeture de la connexion à MongoDB
         await client.close();
         console.log('Connexion MongoDB fermée.');
