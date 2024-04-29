@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Pub } from '../schemas/Pub.schema';
 import { CreatePubDto } from './dto/createPub.dto';
+import { PatchPubDto } from './dto/patchPub.dto';
 
 @Injectable()
 export class PubsService {
@@ -16,9 +17,9 @@ export class PubsService {
     return createdPub;
   }
 
-  async update(id: string, createPubDto: CreatePubDto) {
+  async update(id: string, patchPubDto: PatchPubDto) {
     const updatedPub = await this.pubModel
-      .findByIdAndUpdate(id, createPubDto, { new: true })
+      .findByIdAndUpdate(id, patchPubDto, { new: true })
       .exec();
     return updatedPub;
   }

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PubsService } from './pubs.service';
 import { PubsController } from './pubs.controller';
+import { PubsService } from './pubs.service';
 
 import { Pub, PubSchema } from '../schemas/Pub.schema';
 
