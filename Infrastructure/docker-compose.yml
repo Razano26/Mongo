@@ -9,190 +9,173 @@ networks:
 services:
   # Config servers
   DC1-Config-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC1-Config-srv
-    command: mongod --configsvr --replSet configrs --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/configsrv.conf']
     volumes:
       - DC1-Config-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/configsrv.conf:/etc/mongo/configsrv.conf
     networks:
       - DC1
       - config-network
-  
+
   DC2-Config-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC2-Config-srv
-    command: mongod --configsvr --replSet configrs --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/configsrv.conf']
     volumes:
       - DC2-Config-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/configsrv.conf:/etc/mongo/configsrv.conf
     networks:
       - DC2
       - config-network
 
   DC3-Config-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC3-Config-srv
-    command: mongod --configsvr --replSet configrs --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27019
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/configsrv.conf']
     volumes:
       - DC3-Config-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/configsrv.conf:/etc/mongo/configsrv.conf
     networks:
       - DC3
       - config-network
 
   # Shard 1 servers
   DC1-Shard1-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC1-Shard1-srv
-    command: mongod --shardsvr --replSet shard1 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/shard1.conf']
     volumes:
       - DC1-Shard1-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/shard1.conf:/etc/mongo/shard1.conf
     networks:
       - DC1
       - config-network
 
   DC2-Shard1-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC2-Shard1-srv
-    command: mongod --shardsvr --replSet shard1 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/shard1.conf']
     volumes:
       - DC2-Shard1-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/shard1.conf:/etc/mongo/shard1.conf
     networks:
       - DC2
       - config-network
-  
+
   DC3-Shard1-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC3-Shard1-srv
-    command: mongod --shardsvr --replSet shard1 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27018
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/shard1.conf']
     volumes:
       - DC3-Shard1-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/shard1.conf:/etc/mongo/shard1.conf
     networks:
       - DC3
       - config-network
-  
+
   # Shard 2 servers
   DC1-Shard2-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC1-Shard2-srv
-    command: mongod --shardsvr --replSet shard2 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/shard2.conf']
     volumes:
       - DC1-Shard2-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/shard2.conf:/etc/mongo/shard2.conf
     networks:
       - DC1
       - config-network
-  
+
   DC2-Shard2-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC2-Shard2-srv
-    command: mongod --shardsvr --replSet shard2 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/shard2.conf']
     volumes:
       - DC2-Shard2-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/shard2.conf:/etc/mongo/shard2.conf
     networks:
       - DC2
       - config-network
-  
+
   DC3-Shard2-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC3-Shard2-srv
-    command: mongod --shardsvr --replSet shard2 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27020
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/shard2.conf']
     volumes:
       - DC3-Shard2-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/shard2.conf:/etc/mongo/shard2.conf
     networks:
       - DC3
       - config-network
 
   # Shard 3 servers
   DC1-Shard3-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC1-Shard3-srv
-    command: mongod --shardsvr --replSet shard3 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/shard3.conf']
     volumes:
       - DC1-Shard3-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/shard3.conf:/etc/mongo/shard3.conf
     networks:
       - DC1
       - config-network
-  
+
   DC2-Shard3-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC2-Shard3-srv
-    command: mongod --shardsvr --replSet shard3 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/shard3.conf']
     volumes:
       - DC2-Shard3-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/shard3.conf:/etc/mongo/shard3.conf
     networks:
       - DC2
       - config-network
-  
+
   DC3-Shard3-srv:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC3-Shard3-srv
-    command: mongod --shardsvr --replSet shard3 --auth --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27021
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    entrypoint: ['mongod', '--config', '/etc/mongo/shard3.conf']
     volumes:
       - DC3-Shard3-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/shard3.conf:/etc/mongo/shard3.conf
     networks:
       - DC3
       - config-network
-  
+
   # Mongos routers
   DC1-Mongos:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC1-Mongos
-    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27017
+    entrypoint: ['mongos', '--config', '/etc/mongo/mongos.conf']
+    environment:
+      MONGO_USER: ${MONGO_USER}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_USER_PASSWORD: ${DB_USER_PASSWORD}
     depends_on:
       - DC1-Config-srv
       - DC2-Config-srv
       - DC3-Config-srv
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     volumes:
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/mongos.conf:/etc/mongo/mongos.conf
+      - ./config/setup-cluster.js:/etc/mongo/setup-cluster.js
+      - ./config/setup-admin.js:/etc/mongo/setup-admin.js
+      - ./config/get-repartition.js:/etc/mongo/get-repartition.js
     networks:
       - DC1
       - DC2
@@ -202,18 +185,16 @@ services:
       - 27017:27017
 
   DC2-Mongos:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC2-Mongos
-    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27017
+    entrypoint: ['mongos', '--config', '/etc/mongo/mongos.conf']
     depends_on:
       - DC1-Config-srv
       - DC2-Config-srv
       - DC3-Config-srv
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     volumes:
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
+      - ./config/mongos.conf:/etc/mongo/mongos.conf
     networks:
       - DC1
       - DC2
@@ -223,19 +204,17 @@ services:
       - 27018:27017
 
   DC3-Mongos:
-    image: mongo:4.4
+    image: mongo:latest
     container_name: DC3-Mongos
-    command: mongos --configdb configrs/DC1-Config-srv:27019,DC2-Config-srv:27019,DC3-Config-srv:27019 --keyFile /etc/mongo/mongodb-keyfile --bind_ip_all --port 27017
+    entrypoint: ['mongos', '--config', '/etc/mongo/mongos.conf']
     depends_on:
       - DC1-Config-srv
       - DC2-Config-srv
       - DC3-Config-srv
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     volumes:
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
-      
+      - ./config/mongos.conf:/etc/mongo/mongos.conf
+
     networks:
       - DC1
       - DC2
