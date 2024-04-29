@@ -4,9 +4,11 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BarsModule } from './places/bar/bars.module';
-import { RestaurantsModule } from './places/restaurant/restaurants.module';
+import { BarsModule } from './bar/bars.module';
+import { RestaurantsModule } from './restaurant/restaurants.module';
 import { PlacesModule } from './places/places.module';
+import { PubsModule } from './pub/pubs.module';
+import { Fast_FoodsModule } from './fast_food/fast_food.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { PlacesModule } from './places/places.module';
     UsersModule,
     BarsModule,
     RestaurantsModule,
+    PubsModule,
+    Fast_FoodsModule,
     PlacesModule,
   ],
 })
