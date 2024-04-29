@@ -3,14 +3,14 @@ import { Document } from 'mongoose';
 
 @Schema({ collection: 'bar' })
 export class Bar extends Document {
-  @Prop()
+  @Prop({ required: true })
+  name: string;
+
+  @Prop({ default: 'bar' })
   amenity: string;
 
   @Prop()
-  name: string;
-
-  @Prop()
-  brand: string;
+  brand?: string;
 }
 
 export const BarSchema = SchemaFactory.createForClass(Bar);
