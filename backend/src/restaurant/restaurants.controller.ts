@@ -8,10 +8,10 @@ import {
   Post,
 } from '@nestjs/common';
 
-import { RestaurantsService } from './restaurants.service';
 import { Restaurant } from '../schemas/Restaurant.schema';
 import { CreateRestaurantDto } from './dto/createRestaurant.dto';
 import { PatchRestaurantDto } from './dto/patchRestaurant.dto';
+import { RestaurantsService } from './restaurants.service';
 
 @Controller('restaurants')
 export class RestaurantsController {
