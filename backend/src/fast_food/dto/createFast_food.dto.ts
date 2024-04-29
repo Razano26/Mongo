@@ -1,5 +1,11 @@
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+
 export class CreateFast_FoodDto {
+  @IsString()
+  @IsNotEmpty()
   readonly name: string;
+
+  @IsString()
+  @IsOptional()
   readonly brand?: string;
-  // l'ID du fast_food est généré automatiquement par MongoDB
 }

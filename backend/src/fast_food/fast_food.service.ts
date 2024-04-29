@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 
 import { Fast_Food } from '../schemas/Fast_food.schema';
 import { CreateFast_FoodDto } from './dto/createFast_food.dto';
+import { PatchFast_FoodDto } from './dto/patchFast_food.dto';
 
 @Injectable()
 export class Fast_FoodsService {
@@ -18,9 +19,9 @@ export class Fast_FoodsService {
     return createdFast_Food;
   }
 
-  async update(id: string, createFast_FoodDto: CreateFast_FoodDto) {
+  async update(id: string, patchFast_FoodDto: PatchFast_FoodDto) {
     const updatedFast_Food = await this.fast_foodModel
-      .findByIdAndUpdate(id, createFast_FoodDto, { new: true })
+      .findByIdAndUpdate(id, patchFast_FoodDto, { new: true })
       .exec();
     return updatedFast_Food;
   }
