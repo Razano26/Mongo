@@ -7,8 +7,8 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { Fast_FoodsService } from './fast_food.service';
 import { Fast_Food } from '../schemas/Fast_food.schema';
+import { Fast_FoodsService } from './fast_food.service';
 
 import { CreateFast_FoodDto } from './dto/createFast_food.dto';
 import { PatchFast_FoodDto } from './dto/patchFast_food.dto';
