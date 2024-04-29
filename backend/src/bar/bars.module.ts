@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+
 import { BarsService } from './bars.service';
 import { BarsController } from './bars.controller';
-
-import { Bar, BarSchema } from './schemas/bar.schema';
+import { Bar, BarSchema } from '../schemas/bar.schema';
 
 @Module({
   imports: [
