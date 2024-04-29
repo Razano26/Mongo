@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Bar } from '../schemas/bar.schema';
+import { Bar } from '../schemas/Bar.schema';
 import { CreateBarDto } from './dto/createBar.dto';
 import { PatchBarDto } from './dto/patchBar.dto';
 
@@ -27,6 +27,24 @@ export class BarsService {
 
   async findAll(): Promise<Bar[]> {
     return this.barModel.find().select('name brand _id').exec();
+  }
+
+  async findAllWithBrand(): Promise<Bar[]> {
+    return this.barModel.aggregate([
+      {
+        $lookup: {
+          from: 'tags',
+          localField: 'tags',
+          foreignField: '_id',
+          as: 'tags'
+        }
+      },
+      {
+        $match: {
+          'tags.brand': { $exists: true }
+        }
+      }
+    ]).exec();
   }
 
   async findByName(name: string): Promise<Bar[]> {
