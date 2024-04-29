@@ -3,7 +3,7 @@ import fs from 'fs';
 import csv from 'csv-parser';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
-
+import { v4 as uuid } from 'uuid';
 // Configuration de dotenv
 dotenv.config();
 
@@ -53,6 +53,7 @@ async function main() {
         const tagsData = parseTags(data.tags);
         // Création d'un objet avec les données nettoyées
         const cleanData = {
+          id: uuid(),
           amenity: data.amenity,
           name: data.name,
           brand: data.brand,
@@ -68,6 +69,7 @@ async function main() {
         // Ajout des tags, id et brand à la collection des tags
         // Cette table sera utilisé pour les aggregations
         tagsCollection.push({
+          id: uuid(),
           _id: data._id,
           name: data.name,
           amenity: data.amenity,
