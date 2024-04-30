@@ -31,6 +31,11 @@ export class PubsController {
     return this.pubsService.findAll();
   }
 
+  @Get('with-brand') // Route pour récupérer tous les pubs qui ont une marque : http://localhost:3000/pubs/with-brand
+  async findAllWithBrand(): Promise<Pub[]> {
+    return this.pubsService.findAllWithBrand();
+  }
+
   @Get(':name') // Route pour récupérer un pub par son nom : http://localhost:3000/pubs/{name}
   async findByName(@Param('name') name: string): Promise<Pub[]> {
     return this.pubsService.findByName(name);

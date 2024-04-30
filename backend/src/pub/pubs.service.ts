@@ -28,6 +28,26 @@ export class PubsService {
     return this.pubModel.find().select('name brand _id').exec();
   }
 
+  async findAllWithBrand(): Promise<Pub[]> {
+    return this.pubModel
+      .aggregate([
+        {
+          $lookup: {
+            from: 'tags',
+            localField: 'id',
+            foreignField: '_id',
+            as: 'tags',
+          },
+        },
+        {
+          $match: {
+            'tags.brand': { $ne: '' }, // Vérification que 'brand' n'est pas une chaîne vide
+          },
+        },
+      ])
+      .exec();
+  }
+
   async findByName(name: string): Promise<Pub[]> {
     return this.pubModel
       .find({ name: { $regex: new RegExp(name, 'i') } })

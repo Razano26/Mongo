@@ -29,6 +29,26 @@ export class RestaurantsService {
     return this.restaurantModel.find().select('name brand _id').exec();
   }
 
+  async findAllWithBrand(): Promise<Restaurant[]> {
+    return this.restaurantModel
+      .aggregate([
+        {
+          $lookup: {
+            from: 'tags',
+            localField: 'id',
+            foreignField: '_id',
+            as: 'tags',
+          },
+        },
+        {
+          $match: {
+            'tags.brand': { $ne: '' }, // Vérification que 'brand' n'est pas une chaîne vide
+          },
+        },
+      ])
+      .exec();
+  }
+
   async findByName(name: string): Promise<Restaurant[]> {
     return this.restaurantModel
       .find({ name: { $regex: new RegExp(name, 'i') } })

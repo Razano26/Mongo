@@ -34,14 +34,14 @@ export class BarsService {
       {
         $lookup: {
           from: 'tags',
-          localField: 'tags',
+          localField: 'id',
           foreignField: '_id',
           as: 'tags'
         }
       },
       {
         $match: {
-          'tags.brand': { $exists: true }
+          'tags.brand': { $ne: "" } // Vérification que 'brand' n'est pas une chaîne vide
         }
       }
     ]).exec();

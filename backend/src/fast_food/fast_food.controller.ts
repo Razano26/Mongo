@@ -35,7 +35,7 @@ export class Fast_FoodsController {
     return this.fast_foodsService.findAll();
   }
 
-  @Get('with-brand') // Route pour récupérer tous les bars qui ont une marque : http://localhost:3000/bars/with-brand
+  @Get('with-brand') // Route pour récupérer tous les fast food qui ont une marque : http://localhost:3000/fast_food/with-brand
   async findAllWithBrand(): Promise<Fast_Food[]> {
     return this.fast_foodsService.findAllWithBrand();
   }
