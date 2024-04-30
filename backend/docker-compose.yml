@@ -14,7 +14,7 @@ services:
       context: .
       dockerfile: DockerFileApi
     environment:
-      MONGODB_URI: mongodb://test:abc123@localhost:27017/mtp_open_data
+      MONGODB_URI: mongodb://test:abc123@DC1-Mongos:27017/mtp_open_data
       JWT_SECRET: secret
     ports:
       - "3014:3000"
