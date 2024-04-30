@@ -35,6 +35,11 @@ export class RestaurantsController {
     return this.restaurantsService.findAll();
   }
 
+  @Get('with-brand') // Route pour récupérer tous les restaurants qui ont une marque : http://localhost:3000/restaurants/with-brand
+  async findAllWithBrand(): Promise<Restaurant[]> {
+    return this.restaurantsService.findAllWithBrand();
+  }
+
   @Get(':name') // Route pour récupérer un restaurant par son nom : http://localhost:3000/restaurants/{name}
   async findByName(@Param('name') name: string): Promise<Restaurant[]> {
     return this.restaurantsService.findByName(name);
