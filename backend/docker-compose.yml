@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  service_docs:
+    build:
+      context: .
+      dockerfile: DockerFileDoc
+      
+    ports:
+      - "3012:8080"
+
+  service_dev:
+    build:
+      context: .
+      dockerfile: DockerFileApi
+    environment:
+      MONGODB_URI: mongodb://test:abc123@DC1-Mongos:27017/mtp_open_data
+      JWT_SECRET: secret
+    ports:
+      - "3014:3000"
+    networks:
+      - mongo
+networks:
+  mongo:
+    external: true

@@ -5,6 +5,8 @@ networks:
   DC2:
   DC3:
   config-network:
+  mongo:
+    external: true
 
 services:
   # Config servers
@@ -181,6 +183,7 @@ services:
       - DC2
       - DC3
       - config-network
+      - mongo
     ports:
       - 27017:27017
 
