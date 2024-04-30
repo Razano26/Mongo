@@ -9,5 +9,6 @@ import { Pub, PubSchema } from '../schemas/Pub.schema';
   imports: [MongooseModule.forFeature([{ name: Pub.name, schema: PubSchema }])],
   controllers: [PubsController],
   providers: [PubsService],
+  exports: [PubsService],
 })
 export class PubsModule {}

@@ -5,6 +5,8 @@ import { Pub } from '../schemas/Pub.schema';
 import { CreatePubDto } from './dto/createPub.dto';
 import { PatchPubDto } from './dto/patchPub.dto';
 
+import { v4 as uuid } from 'uuid';
+
 @Injectable()
 export class PubsService {
   constructor(
@@ -13,9 +15,12 @@ export class PubsService {
   ) {}
 
   async create(createPubDto: CreatePubDto): Promise<Pub> {
-    const createdPub = await this.pubModel.create(createPubDto);
-    return createdPub;
-  }
+    const newBar = new this.pubModel({
+        ...createPubDto,
+        id: uuid(),
+    });
+    return newBar.save();
+}
 
   async update(id: string, patchPubDto: PatchPubDto) {
     const updatedPub = await this.pubModel

@@ -4,6 +4,9 @@ import { Document, Types } from 'mongoose';
 @Schema({ collection: 'fast_food' })
 export class Fast_Food extends Document {
   @Prop({ required: true })
+  id: string;
+
+  @Prop({ required: true })
   name: string;
 
   @Prop({ default: 'fast_food' })

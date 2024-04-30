@@ -6,6 +6,8 @@ import { Bar } from '../schemas/Bar.schema';
 import { CreateBarDto } from './dto/createBar.dto';
 import { PatchBarDto } from './dto/patchBar.dto';
 
+import { v4 as uuid } from 'uuid';
+
 @Injectable()
 export class BarsService {
   constructor(
@@ -14,9 +16,12 @@ export class BarsService {
   ) {}
 
   async create(createBarDto: CreateBarDto): Promise<Bar> {
-    const createdBar = await this.barModel.create(createBarDto);
-    return createdBar;
-  }
+    const newBar = new this.barModel({
+        ...createBarDto,
+        id: uuid(),
+    });
+    return newBar.save();
+}
 
   async update(id: string, patchBarDto: PatchBarDto) {
     const updatedBar = await this.barModel

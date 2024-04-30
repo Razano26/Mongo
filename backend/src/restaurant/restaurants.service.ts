@@ -5,6 +5,8 @@ import { Model } from 'mongoose';
 import { Restaurant } from '../schemas/Restaurant.schema';
 import { CreateRestaurantDto } from './dto/createRestaurant.dto';
 
+import { v4 as uuid } from 'uuid';
+
 @Injectable()
 export class RestaurantsService {
   constructor(
@@ -13,10 +15,12 @@ export class RestaurantsService {
   ) {}
 
   async create(createRestaurantDto: CreateRestaurantDto): Promise<Restaurant> {
-    const createdRestaurant =
-      await this.restaurantModel.create(createRestaurantDto);
-    return createdRestaurant;
-  }
+    const newBar = new this.restaurantModel({
+        ...createRestaurantDto,
+        id: uuid(),
+    });
+    return newBar.save();
+}
 
   async update(id: string, createRestaurantDto: CreateRestaurantDto) {
     const updatedRestaurant = await this.restaurantModel
