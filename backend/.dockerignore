@@ -1,0 +1,19 @@
+# Ignore node_modules directory
+node_modules
+
+# Ignore build output directory
+dist
+
+# Ignore development files
+.env
+.env.*
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Ignore logs
+logs
+
+# Ignore any other files or directories you want to exclude from the Docker build context
+documentation
