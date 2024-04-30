@@ -9,6 +9,14 @@ chmod 400 mongodb-keyfile
 
 # Start MongoDB servers
 echo "Starting MongoDB servers..."
+NETWORK_NAME="mongo"
+network_exists=$(docker network ls --filter name=^${NETWORK_NAME}$ --format "{{.Name}}")
+if [ "$network_exists" == "$NETWORK_NAME" ]; then
+    echo "Le réseau $NETWORK_NAME existe déjà."
+else
+    echo "Création du réseau $NETWORK_NAME."
+    docker network create --driver bridge $NETWORK_NAME
+fi
 docker compose up -d
 echo "Waiting for MongoDB servers to start..."
 sleep 10
