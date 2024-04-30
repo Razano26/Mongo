@@ -9,6 +9,7 @@ import { RestaurantsModule } from './restaurant/restaurants.module';
 import { PubsModule } from './pub/pubs.module';
 import { Fast_FoodsModule } from './fast_food/fast_food.module';
 import { BrandModule } from './aggregate/brand/brand.module';
+import { SportModule } from './aggregate/sport/sport.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { BrandModule } from './aggregate/brand/brand.module';
     PubsModule,
     Fast_FoodsModule,
     BrandModule,
+    SportModule
   ],
   controllers: [AppController],
   providers: [AppService],
