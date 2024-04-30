@@ -17,11 +17,11 @@ export class Fast_FoodsService {
 
   async create(createFastFoodDto: CreateFast_FoodDto): Promise<Fast_Food> {
     const newBar = new this.fast_foodModel({
-        ...createFastFoodDto,
-        id: uuid(),
+      ...createFastFoodDto,
+      id: uuid(),
     });
     return newBar.save();
-}
+  }
 
   async update(id: string, patchFast_FoodDto: PatchFast_FoodDto) {
     const updatedFast_Food = await this.fast_foodModel

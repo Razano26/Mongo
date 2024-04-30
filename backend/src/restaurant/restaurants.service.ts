@@ -16,11 +16,11 @@ export class RestaurantsService {
 
   async create(createRestaurantDto: CreateRestaurantDto): Promise<Restaurant> {
     const newBar = new this.restaurantModel({
-        ...createRestaurantDto,
-        id: uuid(),
+      ...createRestaurantDto,
+      id: uuid(),
     });
     return newBar.save();
-}
+  }
 
   async update(id: string, createRestaurantDto: CreateRestaurantDto) {
     const updatedRestaurant = await this.restaurantModel
