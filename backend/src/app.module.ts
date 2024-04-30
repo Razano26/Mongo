@@ -8,6 +8,7 @@ import { BarsModule } from './bar/bars.module';
 import { RestaurantsModule } from './restaurant/restaurants.module';
 import { PubsModule } from './pub/pubs.module';
 import { Fast_FoodsModule } from './fast_food/fast_food.module';
+import { BrandModule } from './aggregate/brand/brand.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { Fast_FoodsModule } from './fast_food/fast_food.module';
     RestaurantsModule,
     PubsModule,
     Fast_FoodsModule,
+    BrandModule,
   ],
   controllers: [AppController],
   providers: [AppService],

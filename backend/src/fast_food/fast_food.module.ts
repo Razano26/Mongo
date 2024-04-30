@@ -13,5 +13,6 @@ import { Fast_FoodsService } from './fast_food.service';
   ],
   controllers: [Fast_FoodsController],
   providers: [Fast_FoodsService],
+  exports: [Fast_FoodsService],
 })
 export class Fast_FoodsModule {}

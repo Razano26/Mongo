@@ -19,7 +19,7 @@ export class Fast_FoodsController {
 
   @Post() // Route pour créer un fast_food : http://localhost:3000/fast_food
   async create(@Body() createFast_FoodDto: CreateFast_FoodDto) {
-    await this.fast_foodsService.create(createFast_FoodDto);
+    return await this.fast_foodsService.create(createFast_FoodDto);
   }
 
   @Patch(':id') // Route pour mettre à jour un fast_food par son id : http://localhost:3000/fast_food/{id}
@@ -32,22 +32,22 @@ export class Fast_FoodsController {
 
   @Get() // Route pour récupérer tous les fast_foods : http://localhost:3000/fast_food
   async findAll(): Promise<Fast_Food[]> {
-    return this.fast_foodsService.findAll();
+    return await this.fast_foodsService.findAll();
   }
 
   @Get('with-brand') // Route pour récupérer tous les fast food qui ont une marque : http://localhost:3000/fast_food/with-brand
   async findAllWithBrand(): Promise<Fast_Food[]> {
-    return this.fast_foodsService.findAllWithBrand();
+    return await this.fast_foodsService.findAllWithBrand();
   }
 
   @Get('with-sport') // Route pour récupérer tous les fast food qui propose un sport : http://localhost:3000/fast_food/with-sport
   async findAllWithSport(): Promise<Fast_Food[]> {
-    return this.fast_foodsService.findAllWithSport();
+    return await this.fast_foodsService.findAllWithSport();
   }
 
   @Get(':name') // Route pour récupérer un fast_food par son nom : http://localhost:3000/fast_food/{name}
   async findByName(@Param('name') name: string): Promise<Fast_Food[]> {
-    return this.fast_foodsService.findByName(name);
+    return await this.fast_foodsService.findByName(name);
   }
 
   @Delete(':id') // Route pour supprimer un fast_food par son id : http://localhost:3000/fast_food/{id}

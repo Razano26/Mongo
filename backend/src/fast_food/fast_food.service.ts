@@ -6,6 +6,8 @@ import { Fast_Food } from '../schemas/Fast_food.schema';
 import { CreateFast_FoodDto } from './dto/createFast_food.dto';
 import { PatchFast_FoodDto } from './dto/patchFast_food.dto';
 
+import { v4 as uuid } from 'uuid';
+
 @Injectable()
 export class Fast_FoodsService {
   constructor(
@@ -13,11 +15,13 @@ export class Fast_FoodsService {
     private readonly fast_foodModel: Model<Fast_Food>,
   ) {}
 
-  async create(createFast_FoodDto: CreateFast_FoodDto): Promise<Fast_Food> {
-    const createdFast_Food =
-      await this.fast_foodModel.create(createFast_FoodDto);
-    return createdFast_Food;
-  }
+  async create(createFastFoodDto: CreateFast_FoodDto): Promise<Fast_Food> {
+    const newBar = new this.fast_foodModel({
+        ...createFastFoodDto,
+        id: uuid(),
+    });
+    return newBar.save();
+}
 
   async update(id: string, patchFast_FoodDto: PatchFast_FoodDto) {
     const updatedFast_Food = await this.fast_foodModel
