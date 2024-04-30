@@ -26,7 +26,7 @@ import { SportModule } from './aggregate/sport/sport.module';
     PubsModule,
     Fast_FoodsModule,
     BrandModule,
-    SportModule
+    SportModule,
   ],
   controllers: [AppController],
   providers: [AppService],

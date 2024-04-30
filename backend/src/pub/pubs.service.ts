@@ -16,11 +16,11 @@ export class PubsService {
 
   async create(createPubDto: CreatePubDto): Promise<Pub> {
     const newBar = new this.pubModel({
-        ...createPubDto,
-        id: uuid(),
+      ...createPubDto,
+      id: uuid(),
     });
     return newBar.save();
-}
+  }
 
   async update(id: string, patchPubDto: PatchPubDto) {
     const updatedPub = await this.pubModel

@@ -17,11 +17,11 @@ export class BarsService {
 
   async create(createBarDto: CreateBarDto): Promise<Bar> {
     const newBar = new this.barModel({
-        ...createBarDto,
-        id: uuid(),
+      ...createBarDto,
+      id: uuid(),
     });
     return newBar.save();
-}
+  }
 
   async update(id: string, patchBarDto: PatchBarDto) {
     const updatedBar = await this.barModel
