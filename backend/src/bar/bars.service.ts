@@ -30,21 +30,23 @@ export class BarsService {
   }
 
   async findAllWithBrand(): Promise<Bar[]> {
-    return this.barModel.aggregate([
-      {
-        $lookup: {
-          from: 'tags',
-          localField: 'id',
-          foreignField: '_id',
-          as: 'tags'
-        }
-      },
-      {
-        $match: {
-          'tags.brand': { $ne: "" } // Vérification que 'brand' n'est pas une chaîne vide
-        }
-      }
-    ]).exec();
+    return this.barModel
+      .aggregate([
+        {
+          $lookup: {
+            from: 'tags',
+            localField: 'id',
+            foreignField: '_id',
+            as: 'tags',
+          },
+        },
+        {
+          $match: {
+            'tags.brand': { $ne: '' }, // Vérification que 'brand' n'est pas une chaîne vide
+          },
+        },
+      ])
+      .exec();
   }
 
   async findByName(name: string): Promise<Bar[]> {

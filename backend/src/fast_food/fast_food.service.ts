@@ -31,21 +31,23 @@ export class Fast_FoodsService {
   }
 
   async findAllWithBrand(): Promise<Fast_Food[]> {
-    return this.fast_foodModel.aggregate([
-      {
-        $lookup: {
-          from: 'tags',
-          localField: 'id',
-          foreignField: '_id',
-          as: 'tags'
-        }
-      },
-      {
-        $match: {
-          'tags.brand': { $ne: "" } // Vérification que 'brand' n'est pas une chaîne vide
-        }
-      }
-    ]).exec();
+    return this.fast_foodModel
+      .aggregate([
+        {
+          $lookup: {
+            from: 'tags',
+            localField: 'id',
+            foreignField: '_id',
+            as: 'tags',
+          },
+        },
+        {
+          $match: {
+            'tags.brand': { $ne: '' }, // Vérification que 'brand' n'est pas une chaîne vide
+          },
+        },
+      ])
+      .exec();
   }
 
   async findByName(name: string): Promise<Fast_Food[]> {
