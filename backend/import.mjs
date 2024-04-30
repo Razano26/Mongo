@@ -70,7 +70,7 @@ async function main() {
         // Cette table sera utilisé pour les aggregations
         tagsCollection.push({
           id: uuid(),
-          _id: data._id,
+          _id: cleanData.id,
           name: data.name,
           amenity: data.amenity,
           brand: data.brand,
