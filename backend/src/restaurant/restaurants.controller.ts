@@ -40,6 +40,11 @@ export class RestaurantsController {
     return this.restaurantsService.findAllWithBrand();
   }
 
+  @Get('with-sport') // Route pour récupérer tous les restaurant qui propose un sport : http://localhost:3000/restaurants/with-sport
+  async findAllWithSport(): Promise<Restaurant[]> {
+    return this.restaurantsService.findAllWithSport();
+  }
+
   @Get(':name') // Route pour récupérer un restaurant par son nom : http://localhost:3000/restaurants/{name}
   async findByName(@Param('name') name: string): Promise<Restaurant[]> {
     return this.restaurantsService.findByName(name);

@@ -48,6 +48,26 @@ export class PubsService {
       .exec();
   }
 
+  async findAllWithSport(): Promise<Pub[]> {
+    return this.pubModel
+      .aggregate([
+        {
+          $lookup: {
+            from: 'tags',
+            localField: 'id',
+            foreignField: '_id',
+            as: 'tags',
+          },
+        },
+        {
+          $match: {
+            'tags.sport': { $ne: null }, // Vérification que 'brand' n'est pas une chaîne vide
+          },
+        },
+      ])
+      .exec();
+  }
+
   async findByName(name: string): Promise<Pub[]> {
     return this.pubModel
       .find({ name: { $regex: new RegExp(name, 'i') } })

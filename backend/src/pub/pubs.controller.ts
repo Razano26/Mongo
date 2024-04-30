@@ -36,6 +36,11 @@ export class PubsController {
     return this.pubsService.findAllWithBrand();
   }
 
+  @Get('with-sport') // Route pour récupérer tous les pubs qui propose un sport : http://localhost:3000/bars/with-sport
+  async findAllWithSport(): Promise<Pub[]> {
+    return this.pubsService.findAllWithSport();
+  }
+
   @Get(':name') // Route pour récupérer un pub par son nom : http://localhost:3000/pubs/{name}
   async findByName(@Param('name') name: string): Promise<Pub[]> {
     return this.pubsService.findByName(name);

@@ -50,6 +50,26 @@ export class Fast_FoodsService {
       .exec();
   }
 
+  async findAllWithSport(): Promise<Fast_Food[]> {
+    return this.fast_foodModel
+      .aggregate([
+        {
+          $lookup: {
+            from: 'tags',
+            localField: 'id',
+            foreignField: '_id',
+            as: 'tags',
+          },
+        },
+        {
+          $match: {
+            'tags.sport': { $ne: null }, // Vérification que 'brand' n'est pas une chaîne vide
+          },
+        },
+      ])
+      .exec();
+  }
+
   async findByName(name: string): Promise<Fast_Food[]> {
     return this.fast_foodModel
       .find({ name: { $regex: new RegExp(name, 'i') } })
