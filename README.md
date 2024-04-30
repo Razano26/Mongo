@@ -15,7 +15,7 @@ This project aims to create a MongoDB database for a restaurant and bar manageme
 - **Transactions**: Implement transactions to manage operations that require atomic modifications across multiple documents or collections.
 - **REST API**: Develop a REST API in Node.js to perform basic CRUD operations as well as more complex queries (aggregations, transactions).
 - **Aggregations**: Create aggregation queries to provide statistics or information, such as a list of establishments with Wi-Fi or bars ranked by opening hours.
-- **API Testing**: Use the Requests library in Python or your browser to test the various API routes.
+- **API Testing**: Use tools like ApiDog or cURL to test the API endpoints and ensure they return the expected results.
 - **Deployment**: Implement clustering and sharding strategies to manage data distribution and scalability.
 - **Load Testing**: Perform load tests to ensure the robustness and performance of your solution.
 - **Documentation**: Document the architecture, design choices, and API endpoints.
@@ -112,6 +112,10 @@ Now you can use the folowing urls to access the services:
 - Documentation: http://IP_SERVER:3012
 - MongoDB: mongodb://IP_SERVER:27017
 
+## Support
+
+If you have any questions or need help, please feel free to reach out to us. We are here to help you.
+In case of any issues, please open an issue on the repository.
 
 ## Contributors
 
