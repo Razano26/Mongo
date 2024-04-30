@@ -136,6 +136,9 @@ services:
       - ./config/get-repartition.js:/etc/mongo/get-repartition.js
     ports:
       - 27017:27017
+    networks:
+      mongo:
+        external: true
 
   DC2-Mongos:
     image: mongo:latest
