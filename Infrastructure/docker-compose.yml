@@ -1,5 +1,13 @@
 version: '3.8'
 
+networks:
+  DC1:
+  DC2:
+  DC3:
+  config-network:
+  mongo:
+    external: true
+
 services:
   # Config servers
   DC1-Config-srv:
@@ -10,6 +18,9 @@ services:
       - DC1-Config-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/configsrv.conf:/etc/mongo/configsrv.conf
+    networks:
+      - DC1
+      - config-network
 
   DC2-Config-srv:
     image: mongo:latest
@@ -19,6 +30,9 @@ services:
       - DC2-Config-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/configsrv.conf:/etc/mongo/configsrv.conf
+    networks:
+      - DC2
+      - config-network
 
   DC3-Config-srv:
     image: mongo:latest
@@ -28,6 +42,9 @@ services:
       - DC3-Config-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/configsrv.conf:/etc/mongo/configsrv.conf
+    networks:
+      - DC3
+      - config-network
 
   # Shard 1 servers
   DC1-Shard1-srv:
@@ -38,6 +55,9 @@ services:
       - DC1-Shard1-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/shard1.conf:/etc/mongo/shard1.conf
+    networks:
+      - DC1
+      - config-network
 
   DC2-Shard1-srv:
     image: mongo:latest
@@ -47,6 +67,9 @@ services:
       - DC2-Shard1-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/shard1.conf:/etc/mongo/shard1.conf
+    networks:
+      - DC2
+      - config-network
 
   DC3-Shard1-srv:
     image: mongo:latest
@@ -56,6 +79,9 @@ services:
       - DC3-Shard1-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/shard1.conf:/etc/mongo/shard1.conf
+    networks:
+      - DC3
+      - config-network
 
   # Shard 2 servers
   DC1-Shard2-srv:
@@ -66,6 +92,9 @@ services:
       - DC1-Shard2-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/shard2.conf:/etc/mongo/shard2.conf
+    networks:
+      - DC1
+      - config-network
 
   DC2-Shard2-srv:
     image: mongo:latest
@@ -75,6 +104,9 @@ services:
       - DC2-Shard2-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/shard2.conf:/etc/mongo/shard2.conf
+    networks:
+      - DC2
+      - config-network
 
   DC3-Shard2-srv:
     image: mongo:latest
@@ -84,6 +116,9 @@ services:
       - DC3-Shard2-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/shard2.conf:/etc/mongo/shard2.conf
+    networks:
+      - DC3
+      - config-network
 
   # Shard 3 servers
   DC1-Shard3-srv:
@@ -94,6 +129,9 @@ services:
       - DC1-Shard3-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/shard3.conf:/etc/mongo/shard3.conf
+    networks:
+      - DC1
+      - config-network
 
   DC2-Shard3-srv:
     image: mongo:latest
@@ -103,6 +141,9 @@ services:
       - DC2-Shard3-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/shard3.conf:/etc/mongo/shard3.conf
+    networks:
+      - DC2
+      - config-network
 
   DC3-Shard3-srv:
     image: mongo:latest
@@ -112,6 +153,9 @@ services:
       - DC3-Shard3-srv:/data/db
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/shard3.conf:/etc/mongo/shard3.conf
+    networks:
+      - DC3
+      - config-network
 
   # Mongos routers
   DC1-Mongos:
@@ -134,10 +178,14 @@ services:
       - ./config/setup-cluster.js:/etc/mongo/setup-cluster.js
       - ./config/setup-admin.js:/etc/mongo/setup-admin.js
       - ./config/get-repartition.js:/etc/mongo/get-repartition.js
+    networks:
+      - DC1
+      - DC2
+      - DC3
+      - config-network
+      - mongo
     ports:
       - 27017:27017
-    networks:
-      - mongo
 
   DC2-Mongos:
     image: mongo:latest
@@ -150,6 +198,11 @@ services:
     volumes:
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/mongos.conf:/etc/mongo/mongos.conf
+    networks:
+      - DC1
+      - DC2
+      - DC3
+      - config-network
     ports:
       - 27018:27017
 
@@ -165,6 +218,11 @@ services:
       - ./mongodb-keyfile:/etc/mongo/mongodb-keyfile
       - ./config/mongos.conf:/etc/mongo/mongos.conf
 
+    networks:
+      - DC1
+      - DC2
+      - DC3
+      - config-network
     ports:
       - 27019:27017
 
@@ -181,7 +239,3 @@ volumes:
   DC1-Shard3-srv:
   DC2-Shard3-srv:
   DC3-Shard3-srv:
-
-networks:
-  mongo:
-    external: true
