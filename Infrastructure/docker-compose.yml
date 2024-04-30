@@ -137,8 +137,7 @@ services:
     ports:
       - 27017:27017
     networks:
-      mongo:
-        external: true
+      - mongo
 
   DC2-Mongos:
     image: mongo:latest
@@ -182,3 +181,7 @@ volumes:
   DC1-Shard3-srv:
   DC2-Shard3-srv:
   DC3-Shard3-srv:
+
+networks:
+  mongo:
+    external: true

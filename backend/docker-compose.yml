@@ -19,5 +19,7 @@ services:
     ports:
       - "3014:3000"
     networks:
-      mongo:
-        external: true
+      - mongo
+networks:
+  mongo:
+    external: true
