@@ -33,7 +33,6 @@ function parseTags(tagsString) {
 }
 
 // Fonction principale
-// Fonction principale
 async function main() {
   try {
     // Connexion à MongoDB
