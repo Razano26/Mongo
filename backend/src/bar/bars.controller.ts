@@ -37,6 +37,11 @@ export class BarsController {
     return this.barsService.findAllWithBrand();
   }
 
+  @Get('with-sport') // Route pour récupérer tous les bars qui propose un sport : http://localhost:3000/bars/with-sport
+  async findAllWithSport(): Promise<Bar[]> {
+    return this.barsService.findAllWithSport();
+  }
+
   @Get(':name') // Route pour récupérer un bar par son nom : http://localhost:3000/bars/{name}
   async findByName(@Param('name') name: string): Promise<Bar[]> {
     return this.barsService.findByName(name);

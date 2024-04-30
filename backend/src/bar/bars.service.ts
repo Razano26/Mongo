@@ -49,6 +49,26 @@ export class BarsService {
       .exec();
   }
 
+  async findAllWithSport(): Promise<Bar[]> {
+    return this.barModel
+      .aggregate([
+        {
+          $lookup: {
+            from: 'tags',
+            localField: 'id',
+            foreignField: '_id',
+            as: 'tags',
+          },
+        },
+        {
+          $match: {
+            'tags.sport': { $ne: null }, // Vérification que 'brand' n'est pas une chaîne vide
+          },
+        },
+      ])
+      .exec();
+  }
+
   async findByName(name: string): Promise<Bar[]> {
     return this.barModel
       .find({ name: { $regex: new RegExp(name, 'i') } })
