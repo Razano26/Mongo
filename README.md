@@ -58,13 +58,13 @@ The `backend` directory contains the Node.js application that serves as the REST
 #### Quick Start
 
 1. **Prerequisites**: Ensure Node.js and npm are installed on your system.
-1. **Move to the backend directory**
-1. **Configuration**: Copy the `.env.template` file as `.env` and adjust the database connection string, username, and password.
-1. **Install Dependencies**: Run `npm install` to install the required packages.
-1. **Import Data**: Run `npm run import` to import the data from the CSV file into the MongoDB database.
-1. **Start the API**: Run `npm run start` to start the API server.
-1. **Access the API**: Open a browser and navigate to `http://localhost:3000` to access the API.
-1. **Test the API**: Use tools like ApiDog or cURL to test the different API endpoints.
+2. **Move to the backend directory**
+3. **Configuration**: Copy the `.env.template` file as `.env` and adjust the database connection string, username, and password.
+4. **Install Dependencies**: Run `npm install` to install the required packages.
+5. **Import Data**: Run `npm run import` to import the data from the CSV file into the MongoDB database.
+6. **Start the API**: Run `npm run start` to start the API server.
+7. **Access the API**: Open a browser and navigate to `http://localhost:3000` to access the API.
+8. **Test the API**: Use tools like ApiDog or cURL to test the different API endpoints.
 
 ```bash
 $ cd backend
@@ -76,12 +76,28 @@ $ npm run start
 
 ## Deployments on servers
 
+### Overview
+
 In this repository, we have included what you need to deploy the mongoDB cluster and the API on a servers. You can find the necessary scripts in the `Infrastructure` directory and the `backend` directory.
 
 The folowing commands will help you to deploy the mongoDB cluster and the API on servers. All services are deployed using Docker.
 After the deployment, you can access the API using the IP address of the server and the port 3014 and the mongoDB cluster using the IP address of the server and the port 27017. For authentication, you can use the username and password that you have set in the `.env` file, the admin or the user defined for use the database seted.
 
 We have included an other service for provide the documentation of the API. You can access the documentation using the IP address of the server and the port 3012.
+
+### Quick Start
+
+1. **Prerequisites**: Ensure Docker and Docker Compose are installed on your system.
+2. **Move to the Infrastructure directory**
+3. **Configuration**: Copy the `.env.template` file as `.env` and adjust the usernames, passwords.
+4. **Starting the Environment**: Run `init-cluster.sh` to start and initialize the MongoDB cluster.
+5. **Move to the backend directory**
+6. **Configuration**: Copy the `.env.template` file as `.env` and adjust the database connection string, username, and password.
+7. **Start the API**: Run `docker-compose up -d` to start the API server and the documentation service.
+8. **Access the API**: Open a browser and navigate to `http://IP_SERVER:3014` to access the API.
+9. **Access the Documentation**: Open a browser and navigate to `http://IP_SERVER:3012` to access the API documentation.
+10. **Access the MongoDB**: Use the connection string `mongodb://IP_SERVER:27017` to access the MongoDB cluster.
+11. **Test the API**: Use tools like ApiDog or cURL to test the different API endpoints.
 
 ```bash
 cd Infrastructure
